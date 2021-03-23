@@ -10,3 +10,14 @@ then try to optimize my code until I get the best form.
 I am going to do the same for Exercises and Exams of this course.
 
 Wish me luck!
+
+#Guids
+There are some explanations about notations of this project and how to use the project in these sections.
+##Versions of codes
+As I want to keep track of my codes (even wrong ones to learn from my mistakes later), I use my one type of versioning:
+
+* The last version of code, which is optimal and correct, get "zero version". By zero version I mean there is no number
+  after the name of that block of code. For example: bubble_sort()
+  
+* The other ones, my guesses which are not optimal or wrong ones, get version numbers from 1. 
+  For example: bubble_sort_v1()
