@@ -303,3 +303,6 @@ class BinaryTree:
             return self.least_common_ancestor(candidate.right_child, node1, node2)
 
         return candidate
+
+    def find_next(self, node):  # TODO: Find the next greater node in the BST.
+        pass
