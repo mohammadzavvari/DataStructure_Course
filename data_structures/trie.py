@@ -47,18 +47,27 @@ class Trie:
             node = node.next_alphabet[index]
         return node
 
-    def autocomplete(self, incomplete_word):
+    def autocomplete(self, incomplete_word) -> []:
 
-        # TODO: Find the uncompleted node in case of existence.
-        # TODO: Find completed words with DFS.
+        # Done: Find the uncompleted node in case of existence.
+        # Done: Find completed words with DFS.
 
-        if self.find_node(incomplete_word) is None:
+        uncompleted_word_node = self.find_node(incomplete_word)
+        if uncompleted_word_node is None:
             return []
 
+        list_of_recommendations = []
+        self.autocomplete_dfs(uncompleted_word_node, incomplete_word, list_of_recommendations)
+        return list_of_recommendations
 
+    def autocomplete_dfs(self, node, incomplete_word, list_of_recommendations):  # TODO: Is my code DFS or BFS?
+        # is_end = True
+        for index_num in range(len(node.next_alphabet)):
+            if node.next_alphabet[index_num] is not None:
+                next_char = index_num + 97  # ord('a') is 97.
+                next_incomplete_word = incomplete_word + chr(next_char)
+                self.autocomplete_dfs(node.next_alphabet[index_num], next_incomplete_word, list_of_recommendations)
+                # is_end = False
+        if node.mark is True:
+            list_of_recommendations.append(incomplete_word)
 
-        node = self.root
-        for character in incomplete_word:
-            pass  # TODO: Do the DFS JOB
-
-    def dfs
