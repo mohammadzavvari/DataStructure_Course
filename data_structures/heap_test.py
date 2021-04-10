@@ -22,3 +22,21 @@ def main():
 
     heap.insert(10)
     print(repr(heap))
+
+    print(heap.pop_top())
+    print(repr(heap))
+
+    print(heap.pop_top())
+    print(repr(heap))
+
+    print(heap.pop_top())
+    print(repr(heap))
+
+    print(heap.pop_top())
+    print(repr(heap))
+
+    print(heap.pop_top())
+    print(repr(heap))
+
+    print(heap.pop_top())
+    print(repr(heap))

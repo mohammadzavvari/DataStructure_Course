@@ -30,28 +30,38 @@ class Heap:
         return
 
     def delete_top(self):
-        if self.heap[self.first_empty_index] == 1:
+        if self.first_empty_index == 1:
             return None
         last_number = self.heap[self.first_empty_index - 1]
         last_number_new_index = 1
         left_child = 2 * last_number_new_index
         right_child = 2 * last_number_new_index + 1
         self.heap[last_number_new_index] = last_number
-
-        while self.heap[last_number_new_index] < self.heap[left_child] \
-                or self.heap[last_number_new_index] < self.heap[right_child]:
-
-            if self.heap[right_child] > self.heap[left_child]:
-                self.heap[last_number_new_index], self.heap[right_child] = \
-                    self.heap[right_child], self.heap[last_number_new_index]
-            else:
-                self.heap[last_number_new_index], self.heap[left_child] = \
-                    self.heap[left_child], self.heap[last_number_new_index]
-
+        self.heap.pop()
         self.first_empty_index -= 1
+
+        while left_child < self.first_empty_index:
+            greater_number_index = last_number_new_index
+
+            if self.heap[left_child] > self.heap[last_number_new_index]:
+                greater_number_index = left_child
+            if right_child < self.first_empty_index and self.heap[right_child] > self.heap[greater_number_index]:
+                greater_number_index = right_child
+
+            self.heap[last_number_new_index], self.heap[greater_number_index] = \
+                self.heap[greater_number_index], self.heap[last_number_new_index]
+
+            if last_number_new_index == greater_number_index:
+                return
+            last_number_new_index = greater_number_index
+            left_child = 2 * last_number_new_index
+            right_child = 2 * last_number_new_index + 1
+
         return
 
     def get_top(self):
+        if self.first_empty_index == 1:
+            raise Exception("Nothing in the heap.")
         return self.heap[1]
 
     def pop_top(self):
