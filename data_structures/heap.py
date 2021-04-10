@@ -29,24 +29,35 @@ class Heap:
         self.first_empty_index += 1
         return
 
-    # def delete_top(self):
-    #     if self.heap[self.first_empty_index] == 1:
-    #         return None
-    #     if self.heap[2] > self.heap[3]:
-    #         self.heap[1] = self.heap[2]
-    #     else:
-    #         self.heap[1] = self.heap[3]
-    #
-    #
-    # def get_top(self):
-    #     return self.heap[1]
-    #
-    # def pop_top(self):
-    #     top = self.get_top()
-    #     self.delete_top()
-    #     return top
+    def delete_top(self):
+        if self.heap[self.first_empty_index] == 1:
+            return None
+        last_number = self.heap[self.first_empty_index - 1]
+        last_number_new_index = 1
+        left_child = 2 * last_number_new_index
+        right_child = 2 * last_number_new_index + 1
+        self.heap[last_number_new_index] = last_number
 
+        while self.heap[last_number_new_index] < self.heap[left_child] \
+                or self.heap[last_number_new_index] < self.heap[right_child]:
 
+            if self.heap[right_child] > self.heap[left_child]:
+                self.heap[last_number_new_index], self.heap[right_child] = \
+                    self.heap[right_child], self.heap[last_number_new_index]
+            else:
+                self.heap[last_number_new_index], self.heap[left_child] = \
+                    self.heap[left_child], self.heap[last_number_new_index]
+
+        self.first_empty_index -= 1
+        return
+
+    def get_top(self):
+        return self.heap[1]
+
+    def pop_top(self):
+        top = self.get_top()
+        self.delete_top()
+        return top
 
 
 class Node:
