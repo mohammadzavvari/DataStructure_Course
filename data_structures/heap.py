@@ -1,3 +1,54 @@
+class Heap:
+    def __init__(self):
+        self.heap = [None]
+        self.first_empty_index = 1
+
+    def __repr__(self):
+        heap_string = ''
+        for i in range(1, self.first_empty_index):
+            if i == self.first_empty_index - 1:
+                heap_string = heap_string + str(self.heap[i]) + "\n"
+            else:
+                heap_string = heap_string + str(self.heap[i]) + ", "
+        return heap_string
+
+    def insert(self, number):
+        self.heap.append(number)
+        if self.first_empty_index == 1:
+            self.first_empty_index += 1
+            return
+        child_index = self.first_empty_index
+        parent_index = child_index // 2
+        while self.heap[parent_index] < self.heap[child_index]:
+            self.heap[parent_index], self.heap[child_index] = \
+                self.heap[child_index], self.heap[parent_index]
+            child_index = parent_index
+            parent_index = child_index // 2
+            if parent_index < 1:
+                break
+        self.first_empty_index += 1
+        return
+
+    # def delete_top(self):
+    #     if self.heap[self.first_empty_index] == 1:
+    #         return None
+    #     if self.heap[2] > self.heap[3]:
+    #         self.heap[1] = self.heap[2]
+    #     else:
+    #         self.heap[1] = self.heap[3]
+    #
+    #
+    # def get_top(self):
+    #     return self.heap[1]
+    #
+    # def pop_top(self):
+    #     top = self.get_top()
+    #     self.delete_top()
+    #     return top
+
+
+
+
 class Node:
     def __init__(self, number):
         self.number = number
@@ -73,35 +124,3 @@ class Heap_v1:  # This Heap hold maximum at the top.
         top = self.get_top()
         self.delete_top()
         return top
-
-
-# class Heap:
-#     def __init__(self):
-#         self.heap = []
-#         self.first_empty_index = 1
-#
-#     def insert(self, number):
-#         self.heap[self.first_empty_index] = number
-#         parent_index = self.first_empty_index // 2
-#         while self.heap[parent_index] > self.heap[self.first_empty_index]:
-#             self.heap[parent_index], self.heap[self.first_empty_index] = \
-#                 self.heap[self.first_empty_index], self.heap[parent_index]
-#         self.first_empty_index += 1
-#         return
-#
-#     def delete_top(self):
-#         if self.heap[self.first_empty_index] == 1:
-#             return None
-#         if self.heap[2] > self.heap[3]:
-#             self.heap[1] = self.heap[2]
-#         else:
-#             self.heap[1] = self.heap[3]
-#
-#
-#     def get_top(self):
-#         return self.heap[1]
-#
-#     def pop_top(self):
-#         top = self.get_top()
-#         self.delete_top()
-#         return top
